@@ -1,0 +1,56 @@
+{
+  "mcpServers": {
+    "enrico-fermi-ai": {
+      "command": "cargo",
+      "args": [
+        "run",
+        "--release",
+        "--quiet"
+      ],
+      "env": {
+        "RUST_LOG": "info",
+        "TITAN_PROTOCOL": "FERMI",
+        "FIPS_203_LEVEL": "ML-KEM-768",
+        "FIPS_204_LEVEL": "ML-DSA-65"
+      },
+      "tools": [
+        {
+          "name": "compute_reactor_criticality_factor",
+          "description": "Calculates effective neutron multiplication factor k_eff and delayed neutron fraction for subcritical/critical states",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "neutron_production": {
+                "type": "number"
+              },
+              "neutron_absorption": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "neutron_production"
+            ]
+          }
+        },
+        {
+          "name": "model_fermi_dirac_quantum_gas",
+          "description": "Computes Fermi energy level, chemical potential and degenerate electron pressure in dense states",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "density_particles_m3": {
+                "type": "number"
+              },
+              "temperature_k": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "density_particles_m3"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
